@@ -1,4 +1,4 @@
-const i = [
+const data = [
   1,
   12,
   2,
@@ -156,6 +156,6 @@ const i = [
   0,
   14,
   0
-];
+]
 
-export default i;
+export default data
