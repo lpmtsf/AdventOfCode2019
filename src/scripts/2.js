@@ -1,6 +1,5 @@
 import i from "./2input";
 let p = 0;
-const input = [1, 1, 1, 4, 99, 5, 6, 0, 99];
 
 /* FIRST PART OF THE PUZZLE */
 
