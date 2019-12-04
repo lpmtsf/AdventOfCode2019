@@ -1,7 +1,7 @@
 const data = [
   1,
-  12,
-  2,
+  0,
+  0,
   3,
   1,
   1,
@@ -156,6 +156,6 @@ const data = [
   0,
   14,
   0
-]
+];
 
-export default data
+export default data;
