@@ -1,106 +1,34 @@
-import { wire1, wire2 } from "./3input";
+//const input = [128392, 643281];
+const input = [122222, 643281];
 
-let arr = {
-  R: 0,
-  L: 0,
-  D: 0,
-  U: 0
-};
+function findPasswordNumber(input) {
+  let lowEnd = input[0];
+  let highEnd = input[1];
 
-let arr2 = {
-  R: 0,
-  L: 0,
-  D: 0,
-  U: 0
-};
+  let goodPasswords = [];
 
-function makeStep(dir1, val1, dir2, val2) {
-  let higherValue;
-  let lowerValue;
-  if (val1 >= val2) {
-    higherValue = val1;
-    lowerValue = val2;
-  } else {
-    higherValue = val2;
-    lowerValue = val1;
-  }
+  for (let i = lowEnd; i <= highEnd; i++) {
+    let answer = [];
+    let digits = i
+      .toString(10)
+      .split("")
+      .map(function(t) {
+        return parseInt(t);
+      });
 
-  let step = 0;
-
-  while (step < higherValue) {
-    if (val1 > 0 && val2 > 0) {
-      if (dir1 == "R") {
-        arr.R++;
-      } else if (dir1 == "L") {
-        arr.L++;
-      } else if (dir1 == "D") {
-        arr.D++;
-      } else if (dir1 == "U") {
-        arr.U++;
-      }
-
-      if (dir2 == "R") {
-        arr2.R++;
-      } else if (dir2 == "L") {
-        arr2.L++;
-      } else if (dir2 == "D") {
-        arr2.D++;
-      } else if (dir2 == "U") {
-        arr2.U++;
-      }
-    } else if (val2 == 0) {
-      if (dir1 == "R") {
-        arr.R++;
-      } else if (dir1 == "L") {
-        arr.L++;
-      } else if (dir1 == "D") {
-        arr.D++;
-      } else if (dir1 == "U") {
-        arr.U++;
-      }
-    } else if (val1 == 0) {
-      if (dir2 == "R") {
-        arr2.R++;
-      } else if (dir2 == "L") {
-        arr2.L++;
-      } else if (dir2 == "D") {
-        arr2.D++;
-      } else if (dir2 == "U") {
-        arr2.U++;
+    for (let k = 0; k < digits.length - 1; k++) {
+      let j = k + 1;
+      if (digits[k] <= digits[k + 1]) {
+        answer.push(digits[k]);
       }
     }
-    val1--;
-    val2--;
-    step++;
-    comparePositions();
+
+    if (answer.length == 6) {
+      goodPasswords.push(answer.join(""));
+    }
   }
+
+  console.log(goodPasswords.length);
 }
 
-function comparePositions() {
-  if (
-    arr.R == arr2.R &&
-    arr.L == arr2.L &&
-    arr.D == arr2.D &&
-    arr.U == arr2.U
-  ) {
-    console.log("CROSSED", arr);
-  }
-}
-
-function Calculate(w1, w2) {
-  let dir1;
-  let dir2;
-  let val1;
-  let val2;
-  let p = 0;
-  while (p < w1.length) {
-    dir1 = w1[p].charAt(0);
-    val1 = parseInt(w1[p].substr(1));
-    dir2 = w2[p].charAt(0);
-    val2 = parseInt(w2[p].substr(1));
-    makeStep(dir1, val1, dir2, val2);
-    p++;
-  }
-}
-
-Calculate(wire1, wire2);
+findPasswordNumber(input);
